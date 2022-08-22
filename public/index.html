@@ -44,22 +44,18 @@
           <button class="ui-button ui-widget ui-corner-all" id="btnRequest">Load</button>
           <div id="myDynamicTable"></div>
         </div>
+
         <div id="tabs-3">
 
           <div class="flex justify-center">
             <div class="rounded-lg shadow-lg bg-white max-w-sm">
               <a href="#!">
-                <img class="rounded-t-lg" src="/public/image/c2.png" alt=""/>
+                <img class="rounded-t-lg" src="/image/c2.png" alt=""/>
               </a>
-              <div class="p-6">
-                <h5 class="text-gray-900 text-xl font-medium mb-2">I'm pancake</h5>
-                <p class="text-gray-700 text-base mb-4">
-                  Zzz.Zzz 
-                </p>
-                <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-              </div>
+              <pre id="data"></pre>
             </div>
           </div>
+          
         
         </div>
     </div><!-- tabs-->
@@ -94,7 +90,7 @@
            headers: { 
              'Content-Type': 'application/json',
              "Accepts": "application/json",
-             "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjU4ODMwNTc0LCJleHAiOjE2NTg4MzQxNzQsIm5iZiI6MTY1ODgzMDU3NCwianRpIjoiTDB5SUhkZHdPZ2R1S1NPTiIsInN1YiI6MTksInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.M16oB_W2RMHGMiL3ITeqOD32uyqcfKwDGUfAkg5c_x0",
+             "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjYxMTg0MjIxLCJleHAiOjE2NjExODc4MjEsIm5iZiI6MTY2MTE4NDIyMSwianRpIjoiWGJCYjd5VW9zelNiekRwYiIsInN1YiI6MTksInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.2OUoDZqk7HXfOs64n2mXu85pBkvBeuAMhM7gs0i4O0Y",
            },
            success: function(data){
              console.log(data);
@@ -253,7 +249,7 @@
           //elementButtonSave.setAttribute("class","tealA400");
           
          
-          elementButtonSave.setAttribute("onclick","popupConfirm('"+items[i].fullname+"',this)");
+          elementButtonSave.setAttribute("onclick","popupConfirm('"+items[i].student_id+"','"+items[i].fullname+"','"+items[i].gpa+"','"+items[i].position+"',this)");
           
   
           cell5.appendChild(elementButtonSave);
@@ -267,7 +263,12 @@
       myTableDiv.appendChild(table);
     }
   
-    function popupConfirm(fullname,objElement){
-      alert(fullname);
+    var util = require('./utility');
+
+    function popupConfirm(id,name,gpa,pos,objElement){
+      //alert(fullname);
+      $("#tabs").tabs("option","active",2)
+      var data = [id,name,gpa,pos]
+      document.getElementById('data').innerHTML=JSON.stringify(data,null,4)
     }
   </script>
